@@ -6,7 +6,7 @@ This is a sample template for lead-emails-processor - Below is a brief explanati
 .
 ├── README.MD                   <-- This instructions file
 ├── event.json                  <-- API Gateway Proxy Integration event payload
-├── hello-world                 <-- Source code for a lambda function
+├── app                         <-- Source code for a lambda function
 │   └── app.js                  <-- Lambda function code
 │   └── package.json            <-- NodeJS dependencies and scripts
 │   └── tests                   <-- Unit tests
@@ -29,7 +29,7 @@ This is a sample template for lead-emails-processor - Below is a brief explanati
 **Invoking function locally using a local sample payload**
 
 ```bash
-sam local invoke HelloWorldFunction --event event.json
+sam local invoke LeadEmailProcessor --event event.json
 ```
  
 **Invoking function locally through local API Gateway**
@@ -58,7 +58,7 @@ AWS Lambda NodeJS runtime requires a flat folder with all dependencies including
 
 ```yaml
 ...
-    HelloWorldFunction:
+    LeadEmailProcessor:
         Type: AWS::Serverless::Function
         Properties:
             CodeUri: hello-world/
@@ -106,7 +106,7 @@ To simplify troubleshooting, SAM CLI has a command called sam logs. sam logs let
 `NOTE`: This command works for all AWS Lambda functions; not just the ones you deploy using SAM.
 
 ```bash
-sam logs -n HelloWorldFunction --stack-name lead-emails-processor --tail
+sam logs -n LeadEmailProcessor --stack-name lead-emails-processor --tail
 ```
 
 You can find more information and examples about filtering Lambda function logs in the [SAM CLI Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).
@@ -137,7 +137,7 @@ Here are a few things you can try to get more acquainted with building serverles
 
 * Uncomment lines on `app.js`
 * Build the project with ``sam build --use-container``
-* Invoke with ``sam local invoke HelloWorldFunction --event event.json``
+* Invoke with ``sam local invoke LeadEmailProcessor --event event.json``
 * Update tests
 
 ### Create an additional API resource
@@ -175,7 +175,7 @@ All commands used throughout this document
 
 ```bash
 # Invoke function locally with event.json as an input
-sam local invoke HelloWorldFunction --event event.json
+sam local invoke LeadEmailProcessor --event event.json
 
 # Run API Gateway locally
 sam local start-api
@@ -201,7 +201,7 @@ aws cloudformation describe-stacks \
     --output table
 
 # Tail Lambda function Logs using Logical name defined in SAM Template
-sam logs -n HelloWorldFunction --stack-name lead-emails-processor --tail
+sam logs -n LeadEmailProcessor --stack-name lead-emails-processor --tail
 ```
 
 **NOTE**: Alternatively this could be part of package.json scripts section.
