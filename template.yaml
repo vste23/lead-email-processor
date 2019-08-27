@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  lead-emails-processor
+
+  Sample SAM Template for lead-emails-processor
+  
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  LeadEmailProcessor:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: app/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+      Events:
+        HelloWorld:
+          Type: S3 # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#s3
+          Properties:
+            Bucket: respage-lead-emails
+            Events: s3:ObjectCreated:*
+
+Outputs:
+  LeadEmailProcessor:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt LeadEmailProcessor.Arn
+  LeadEmailProcessorIamRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt LeadEmailProcessorRole.Arn
