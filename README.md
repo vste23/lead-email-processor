@@ -1,3 +1,18 @@
+# Deployment in three steps #
+1)
+```bash
+    cd app && zip -r ../build.zip * && cd ../
+```
+2)
+```bash
+    sam package --output-template-file packaged.yaml --s3-bucket respage-lamda-builds
+```
+3)
+```bash
+    aws cloudformation deploy --template-file /Users/instyle/Documents/apps/respage/lead-emails-processor/packaged.yaml --capabilities CAPABILITY_IAM --stack-name lead-email-processor-build
+```
+
+
 # lead-emails-processor
 
 This is a sample template for lead-emails-processor - Below is a brief explanation of what we have generated for you:

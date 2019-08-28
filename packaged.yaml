@@ -12,7 +12,7 @@ Resources:
   LeadEmailProcessor:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://respage-lamda-builds/cdbc974e48f7783f78652936a9d8c01e
+      CodeUri: s3://respage-lamda-builds/fb17a06858f08c4233a5c1d9f5e12a33
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
       Events:
