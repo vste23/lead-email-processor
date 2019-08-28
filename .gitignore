@@ -53,6 +53,13 @@ build/Release
 
 # Dependency directories
 node_modules/
+
+# Ignore node_modules
+**/node_modules
+
+# Ignore any zip files
+*.zip
+
 jspm_packages/
 
 # Typescript v1 declaration files

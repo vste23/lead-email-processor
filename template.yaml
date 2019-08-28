@@ -14,20 +14,27 @@ Resources:
   LeadEmailProcessor:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: app/
+      CodeUri: ./build.zip
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
       Events:
-        HelloWorld:
+        RespageLeadEmailsTrigger:
           Type: S3 # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#s3
           Properties:
-            Bucket: respage-lead-emails
+            Bucket:
+              Ref: RespageLeadEmails
             Events: s3:ObjectCreated:*
+
+  RespageLeadEmails:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      BucketName: respage-lead-emails
 
 Outputs:
   LeadEmailProcessor:
-    Description: "Hello World Lambda Function ARN"
+    Description: "LeadEmailProcessor Lambda Function ARN"
     Value: !GetAtt LeadEmailProcessor.Arn
   LeadEmailProcessorIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
+    Description: "Implicit IAM Role created for LeadEmailProcessor function"
     Value: !GetAtt LeadEmailProcessorRole.Arn

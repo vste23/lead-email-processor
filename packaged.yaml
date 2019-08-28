@@ -1,0 +1,42 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'lead-emails-processor
+
+  Sample SAM Template for lead-emails-processor
+
+  '
+Globals:
+  Function:
+    Timeout: 3
+Resources:
+  LeadEmailProcessor:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://respage-lamda-builds/cdbc974e48f7783f78652936a9d8c01e
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+      Events:
+        RespageLeadEmailsTrigger:
+          Type: S3
+          Properties:
+            Bucket:
+              Ref: RespageLeadEmails
+            Events: s3:ObjectCreated:*
+  RespageLeadEmails:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      BucketName: respage-lead-emails
+Outputs:
+  LeadEmailProcessor:
+    Description: LeadEmailProcessor Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - LeadEmailProcessor
+      - Arn
+  LeadEmailProcessorIamRole:
+    Description: Implicit IAM Role created for LeadEmailProcessor function
+    Value:
+      Fn::GetAtt:
+      - LeadEmailProcessorRole
+      - Arn

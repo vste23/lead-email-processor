@@ -1,0 +1,5 @@
+{
+  "LeadEmailProcessor": {
+    "EMAIS_BUCKET_NAME": "respage-lead-emails"
+  }
+}

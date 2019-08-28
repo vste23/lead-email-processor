@@ -7,7 +7,9 @@
   "author": "SAM CLI",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0"
+    "aws-sdk": "^2.518.0",
+    "axios": "^0.18.0",
+    "mailparser": "^2.7.1"
   },
   "scripts": {
     "test": "mocha tests/unit/"
