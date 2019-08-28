@@ -18,6 +18,7 @@ var simpleParser = require('mailparser').simpleParser;
  */
 exports.lambdaHandler = async (event, context, callback) => {
     try {
+        console.log("process.env.ENV", process.env.ENV);
         if (process.env.ENV === "development") {
             console.log(JSON.stringify(event));
             console.log(JSON.stringify(event.Records));
